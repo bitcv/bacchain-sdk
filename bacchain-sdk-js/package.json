@@ -1,0 +1,22 @@
+{
+  "name": "bacchain-sdk",
+  "version": "1.0.0",
+  "description": "bacchain-sdk",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bech32": "^1.1.2",
+    "bip32": "^1.0.2",
+    "bip39": "^2.5.0",
+    "bitcoinjs-lib": "^4.0.2",
+    "node-fetch": "^2.6.0",
+    "secp256k1": "^3.8.0"
+  }
+}
