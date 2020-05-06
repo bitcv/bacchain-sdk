@@ -277,7 +277,7 @@ bacchainSdk.getTxInfoByHash(txHash).then(data => {
 
 ```js
 bacchainSdk.getAccounts(accAddr).then(accData => {
-  	// 获取钱包信息
+    // 获取钱包信息
     var accountNumber = accData.value.account_number
     var sequence = accData.value.sequence
     
@@ -300,7 +300,7 @@ bacchainSdk.getAccounts(accAddr).then(accData => {
     var stdSignMsg = bacchainSdk.NewStdMsg(txInfo);
     var signedTx = bacchainSdk.sign(stdSignMsg, ecpairPriv); // ecpairPriv钱包私钥
   
-  	// 交易广播
+    // 交易广播
     bacchainSdk.broadcast(signedTx).then(data => {
         console.log(data);
     })
