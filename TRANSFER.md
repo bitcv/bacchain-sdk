@@ -57,17 +57,17 @@ bacchainSdk.getAccounts(accAddr).then(data => {
 
 ```json
 {
-	  "type": "auth/Account",
-	  "value": {
-		    "address": "bac1ywmevyc2wqeh90kwdx6v3uxn0jkpqxxxjffx34",
-		    "coins": [{
-			  "denom": "nbac",
-			  "amount": "10000000000"
-		}],
-		"public_key": null,
-		"account_number": "10383",
-		"sequence": "0"
-	}
+    "type": "auth/Account",
+    "value": {
+        "address": "bac1ywmevyc2wqeh90kwdx6v3uxn0jkpqxxxjffx34",
+        "coins": [{
+            "denom": "nbac",
+            "amount": "10000000000"
+        }],
+        "public_key": null,
+        "account_number": "10383",
+        "sequence": "0"
+    }
 }
 ```
 
