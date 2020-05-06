@@ -287,7 +287,7 @@ bacchainSdk.getAccounts(accAddr).then(accData => {
         from_address :"bac1jhlumcwwcltjz4affqme7v30l08x6j65zkafez", // 转出地址
         to_address :"bac19qp38ktnphpy0v8883ht8yw56y70v788vgde9n", // 转入
         amountDenom: "nbac", // 发送币种
-        amount: 1, // 转账数量
+        amount: 1000000000, // 转账数量
         feeDenom: "nbac", // 矿工费币种
         fee: 100000000, // 转账矿工费数量，最小值为0.1BAC
         gas: 2000000, // 转账消耗的最大gas
