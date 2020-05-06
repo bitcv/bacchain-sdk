@@ -57,12 +57,12 @@ bacchainSdk.getAccounts(accAddr).then(data => {
 
 ```json
 {
-	"type": "auth/Account",
-	"value": {
-		"address": "bac1ywmevyc2wqeh90kwdx6v3uxn0jkpqxxxjffx34",
-		"coins": [{
-			"denom": "nbac",
-			"amount": "10000000000"
+	  "type": "auth/Account",
+	  "value": {
+		    "address": "bac1ywmevyc2wqeh90kwdx6v3uxn0jkpqxxxjffx34",
+		    "coins": [{
+			  "denom": "nbac",
+			  "amount": "10000000000"
 		}],
 		"public_key": null,
 		"account_number": "10383",
@@ -85,7 +85,7 @@ bacchainSdk.getAccounts(accAddr).then(data => {
 
 ```js
 bacchainSdk.getBalances(accAddr).then(data => {
-  	console.log("查询钱包余额")
+    console.log("查询钱包余额")
     console.log(data)
 });
 ```
@@ -94,8 +94,8 @@ bacchainSdk.getBalances(accAddr).then(data => {
 
 ```json
 [{
-	"denom": "nbac",
-	"amount": "10000000000"
+    "denom": "nbac",
+    "amount": "10000000000"
 }]
 ```
 
@@ -311,8 +311,8 @@ bacchainSdk.getAccounts(accAddr).then(accData => {
 
 ```json
 {
-	"height": "0",
-	"txhash": "F6A8F4D8C7798BC1A7FDAEDDC89BD7F113B60A1EED94158AA5084524651B7269"
+    "height": "0",
+    "txhash": "F6A8F4D8C7798BC1A7FDAEDDC89BD7F113B60A1EED94158AA5084524651B7269"
 }
 ```
 
