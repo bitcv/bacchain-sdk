@@ -436,7 +436,7 @@ bacchainSdk.prototype.getBlockByHeight = function(id) {
     return fetch(this.url + "/blocks/" + id) .then(response => response.json())
 }
 
-bacchainSdk.prototype.getBlockHeight = function() {
+bacchainSdk.prototype.getLatestBlock = function() {
     return fetch(this.url + '/blocks/latest') .then(response => response.json())
 }
 
