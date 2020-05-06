@@ -155,8 +155,8 @@ bacchainSdk.getLatestBlock().then(data => {
 
 返回参数说明：
 
-* `header.height` 当前区块高度
-* `header.time` 出块时间
+* `block.header.height` 当前区块高度
+* `block.header.time` 出块时间
 * `block.data.txs` 区块打包的交易哈希列表
 
 解析交易hash
