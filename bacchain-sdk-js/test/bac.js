@@ -1,5 +1,5 @@
 const bacchainjs = require("../src");
-const chainId = "test";
+const chainId = "bacchain-mainnet-1.0";
 const lcdUrl = "http://127.0.0.1:1317";
 const bacchainSdk = bacchainjs.newBacchainSdk(lcdUrl, chainId)
 
@@ -220,17 +220,31 @@ async function sendTx () {
     // }
 
 
+    // var txInfo = {
+    //     type: "bacchain/MsgWithdrawValidatorCommission",
+    //     validator_address:validator_address,
+    //     feeDenom: "nbac",
+    //     fee: 2000000,
+    //     gas: 2000000,
+    //     memo: "",
+    //     account_number: data.value.account_number,
+    //     sequence: data.value.sequence
+    // }
+
     var txInfo = {
-        type: "bacchain/MsgWithdrawValidatorCommission",
-        validator_address:validator_address,
+        type: "bacchain/MsgEdata",
+        account:from_address,
+        utype: 1,
+        data: "12",
         feeDenom: "nbac",
-        fee: 2000000,
-        gas: 2000000,
+        fee: 100000000,
+        gas: 100000000,
         memo: "",
         account_number: data.value.account_number,
         sequence: data.value.sequence
     }
 
+    console.log(txInfo)
 
     var  stdSignMsg = bacchainSdk.NewStdMsg(txInfo);
     var signedTx = bacchainSdk.sign(stdSignMsg, ecpairPriv);

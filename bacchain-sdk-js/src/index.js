@@ -103,28 +103,28 @@ bacchainSdk.prototype.getECPairPriv = function(mnemonic) {
 
 bacchainSdk.prototype.NewStdMsg = function(input) {
 	const stdSignMsg = new Object;
-	if (input.type == "bacchain/MsgSend") {
-		stdSignMsg.json =
-		{
-			msgs: [
-				{
-					type: input.type,
-					value: {
-						amount: [
-							{
-								amount: String(input.amount),
-								denom: input.amountDenom
-							}
-						],
-						from_address: input.from_address,
-						to_address: input.to_address,
-					}
-				}
-			]
-		}
-	} else if (input.type == "bacchain/MsgMultiSend") {
-        stdSignMsg.json =
-            {
+	switch (input.type){
+        case "bacchain/MsgSend":
+            stdSignMsg.json = {
+                msgs: [
+                    {
+                        type: input.type,
+                        value: {
+                            amount: [
+                                {
+                                    amount: String(input.amount),
+                                    denom: input.amountDenom
+                                }
+                            ],
+                            from_address: input.from_address,
+                            to_address: input.to_address,
+                        }
+                    }
+                ]
+            }
+            break;
+        case "bacchain/MsgMultiSend":
+            stdSignMsg.json = {
                 msgs: [
                     {
                         type: input.type,
@@ -135,56 +135,56 @@ bacchainSdk.prototype.NewStdMsg = function(input) {
                     }
                 ]
             }
-    } else if (input.type == "bacchain/MsgDelegate") {
-		stdSignMsg.json =
-		{
-			msgs: [
-				{
-					type: input.type,
-					value: {
-						delegator_address: input.delegator_address,
-						validator_address: input.validator_address,
-                        amount: {
-                            denom: input.amountDenom,
-                            amount: String(input.amount),
-                        },
-					}
-				}
-			]
-		}
-	} else if (input.type == "bacchain/MsgUndelegate") {
-		stdSignMsg.json =
-		{
-			msgs: [
-				{
-					type: input.type,
-					value: {
-						amount: {
-							amount: String(input.amount),
-							denom: input.amountDenom
-						},
-						delegator_address: input.delegator_address,
-						validator_address: input.validator_address
-					}
-				}
-			]
-		}
-	} else if (input.type == "bacchain/MsgWithdrawDelegationReward") {
-		stdSignMsg.json =
-		{
-			msgs: [
-				{
-					type: input.type,
-					value: {
-						delegator_address: input.delegator_address,
-						validator_address: input.validator_address
-					}
-				}
-			]
-		}
-	} else if (input.type == "bacchain/MsgWithdrawValidatorCommission") {
-        stdSignMsg.json =
-            {
+            break;
+        case "bacchain/MsgDelegate":
+            stdSignMsg.json = {
+                msgs: [
+                    {
+                        type: input.type,
+                        value: {
+                            delegator_address: input.delegator_address,
+                            validator_address: input.validator_address,
+                            amount: {
+                                denom: input.amountDenom,
+                                amount: String(input.amount),
+                            },
+                        }
+                    }
+                ]
+            }
+            break;
+        case "bacchain/MsgUndelegate":
+            stdSignMsg.json = {
+                msgs: [
+                    {
+                        type: input.type,
+                        value: {
+                            amount: {
+                                amount: String(input.amount),
+                                denom: input.amountDenom
+                            },
+                            delegator_address: input.delegator_address,
+                            validator_address: input.validator_address
+                        }
+                    }
+                ]
+            }
+            break;
+        case "bacchain/MsgWithdrawDelegationReward":
+            stdSignMsg.json = {
+                msgs: [
+                    {
+                        type: input.type,
+                        value: {
+                            delegator_address: input.delegator_address,
+                            validator_address: input.validator_address
+                        }
+                    }
+                ]
+            }
+            break;
+        case "bacchain/MsgWithdrawValidatorCommission":
+            stdSignMsg.json = {
                 msgs: [
                     {
                         type: input.type,
@@ -194,110 +194,94 @@ bacchainSdk.prototype.NewStdMsg = function(input) {
                     }
                 ]
             }
-    } else if (input.type == "bacchain/MsgSubmitProposal") {
-		stdSignMsg.json =
-		{
-			msgs: [
-				{
-					type: input.type,
-					value: {
-						description: input.description,
-						initial_deposit: [
-	                        {
-	                        	amount: String(input.initialDepositAmount),
-	                            denom: input.initialDepositDenom
-	                        }
-	                    ],
-	                    proposal_type: input.proposal_type,
-	                    proposer: input.proposer,
-						title: input.title
-					}
-				}
-			]
-		}
-	} else if (input.type == "bacchain/MsgDeposit") {
-		stdSignMsg.json =
-		{
-			msgs: [
-				{
-					type: input.type,
-					value: {
-						amount: [
-	                        {
-	                        	amount: String(input.amount),
-	                            denom: input.amountDenom
-	                        }
-	                    ],
-	                    depositor: input.depositor,
-						proposal_id: String(input.proposal_id)
-					}
-				}
-			]
-		}
-	} else if (input.type == "bacchain/MsgVote") {
-		stdSignMsg.json =
-		{
-			msgs: [
-				{
-					type: input.type,
-					value: {
-						option: input.option,
-						proposal_id: String(input.proposal_id),
-	                    voter: input.voter
-					}
-				}
-			],
-		}
-	} else if (input.type == "bacchain/MsgBeginRedelegate") {
-		stdSignMsg.json =
-		{
-			msgs: [
-				{
-					type: input.type,
-					value: {
-						amount: {
-							amount: String(input.amount),
-							denom: input.amountDenom
-						},
-						delegator_address: input.delegator_address,
-						validator_dst_address: input.validator_dst_address,
-						validator_src_address: input.validator_src_address
-					}
-				}
-			]
-		}
-	} else if (input.type == "bacchain/MsgModifyWithdrawAddress") {
-	    stdSignMsg.json =
-		{
-			msgs: [
-				{
-					type: input.type,
-					value: {
-						delegator_address: input.delegator_address,
-						withdraw_address: input.withdraw_address
-					}
-				}
-			]
-		}
-	} else if (input.type == "bacchain/MsgBurnBcvToStake") {
-	    stdSignMsg.json =
-		{
-            msgs: [
-                {
-                    type: input.type,
-                    value: {
-                        amount: {
-                            amount: String(input.amount),
-                            denom: input.amountDenom
-                        },
-                        acc_address: input.acc_address,
+            break;
+        case  "bacchain/MsgSubmitProposal":
+            stdSignMsg.json = {
+                msgs: [
+                    {
+                        type: input.type,
+                        value: {
+                            description: input.description,
+                            initial_deposit: [
+                                {
+                                    amount: String(input.initialDepositAmount),
+                                    denom: input.initialDepositDenom
+                                }
+                            ],
+                            proposal_type: input.proposal_type,
+                            proposer: input.proposer,
+                            title: input.title
+                        }
                     }
-                }
-            ]
-		}
-	} else if (input.type == "bacchain/MsgBurnBcvToEnergy") {
-        stdSignMsg.json =
-            {
+                ]
+            }
+            break;
+        case "bacchain/MsgDeposit":
+            stdSignMsg.json = {
+                msgs: [
+                    {
+                        type: input.type,
+                        value: {
+                            amount: [
+                                {
+                                    amount: String(input.amount),
+                                    denom: input.amountDenom
+                                }
+                            ],
+                            depositor: input.depositor,
+                            proposal_id: String(input.proposal_id)
+                        }
+                    }
+                ]
+            }
+            break;
+        case  "bacchain/MsgVote":
+            stdSignMsg.json = {
+                msgs: [
+                    {
+                        type: input.type,
+                        value: {
+                            option: input.option,
+                            proposal_id: String(input.proposal_id),
+                            voter: input.voter
+                        }
+                    }
+                ],
+            }
+            break;
+        case  "bacchain/MsgBeginRedelegate":
+            stdSignMsg.json = {
+                msgs: [
+                    {
+                        type: input.type,
+                        value: {
+                            amount: {
+                                amount: String(input.amount),
+                                denom: input.amountDenom
+                            },
+                            delegator_address: input.delegator_address,
+                            validator_dst_address: input.validator_dst_address,
+                            validator_src_address: input.validator_src_address
+                        }
+                    }
+                ]
+            }
+            break;
+        case  "bacchain/MsgModifyWithdrawAddress":
+            stdSignMsg.json = {
+                msgs: [
+                    {
+                        type: input.type,
+                        value: {
+                            delegator_address: input.delegator_address,
+                            withdraw_address: input.withdraw_address
+                        }
+                    }
+                ]
+            }
+            break;
+        case  "bacchain/MsgBurnBcvToStake":
+            stdSignMsg.json = {
                 msgs: [
                     {
                         type: input.type,
@@ -311,9 +295,25 @@ bacchainSdk.prototype.NewStdMsg = function(input) {
                     }
                 ]
             }
-    } else if (input.type == "bacchain/MsgEditValidator") {
-        stdSignMsg.json =
-            {
+            break;
+        case  "bacchain/MsgBurnBcvToEnergy":
+            stdSignMsg.json = {
+                msgs: [
+                    {
+                        type: input.type,
+                        value: {
+                            amount: {
+                                amount: String(input.amount),
+                                denom: input.amountDenom
+                            },
+                            acc_address: input.acc_address,
+                        }
+                    }
+                ]
+            }
+            break;
+        case "bacchain/MsgEditValidator":
+            stdSignMsg.json = {
                 msgs: [
                     {
                         type: input.type,
@@ -331,9 +331,25 @@ bacchainSdk.prototype.NewStdMsg = function(input) {
                     }
                 ]
             }
-    }else {
-		throw new Error("error type " + input.type)
-	}
+            break;
+        case "bacchain/MsgEdata":
+            stdSignMsg.json = {
+                msgs: [
+                    {
+                        type: input.type,
+                        value: {
+                            account: input.account,
+                            utype: input.utype,
+                            data: input.data,
+                        }
+                    }
+                ]
+            }
+            break;
+        default:
+            throw new Error("error type " + input.type)
+    }
+
 
     stdSignMsg.json.sequence = String(input.sequence)
     stdSignMsg.json.account_number = String(input.account_number)
