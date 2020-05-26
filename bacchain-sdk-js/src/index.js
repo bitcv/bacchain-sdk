@@ -457,6 +457,10 @@ bacchainSdk.prototype.getLatestBlock = function() {
 }
 
 
+bacchainSdk.prototype.generateRandomMnemonic = function() {
+    return bip39.generateMnemonic(256);
+}
+
 module.exports = {
 	newBacchainSdk: newBacchainSdk
 }
