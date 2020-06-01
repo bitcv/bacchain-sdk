@@ -346,6 +346,58 @@ bacchainSdk.prototype.NewStdMsg = function(input) {
                 ]
             }
             break;
+        case "bacchain/MsgIssueToken":
+            stdSignMsg.json = {
+                msgs: [
+                    {
+                        type: input.type,
+                        value: {
+                            owner_address: input.owner_address,
+                            outer_name: input.outer_name,
+                            supply_num: input.supply_num,
+                            margin:{
+                                amount: String(input.margin_amount),
+                                denom: input.margin_denom
+                            },
+                            precision:input.precision,
+                            website:input.website,
+                            description:input.description,
+                        }
+                    }
+                ]
+            }
+        case "bacchain/MsgRedeem":
+            stdSignMsg.json = {
+                msgs: [
+                    {
+                        type: input.type,
+                        value: {
+                            account: input.account,
+                            amount:{
+                                amount: String(input.redeem_amount),
+                                denom: input.redeem_inner_name
+                            },
+                        }
+                    }
+                ]
+            }
+        case "bacchain/MsgAddMargin":
+            stdSignMsg.json = {
+                msgs: [
+                    {
+                        type: input.type,
+                        value: {
+                            account: input.account,
+                            inner_name: input.inner_name,
+                            amount:{
+                                amount: String(input.margin_amount),
+                                denom: input.margin_denom
+                            },
+                        }
+                    }
+                ]
+            }
+            break;
         default:
             throw new Error("error type " + input.type)
     }

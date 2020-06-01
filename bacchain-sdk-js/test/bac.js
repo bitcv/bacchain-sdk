@@ -1,5 +1,5 @@
 const bacchainjs = require("../src");
-const chainId = "bacchain-mainnet-1.0";
+const chainId = "test";
 const lcdUrl = "http://127.0.0.1:1317";
 const bacchainSdk = bacchainjs.newBacchainSdk(lcdUrl, chainId)
 
@@ -231,11 +231,57 @@ async function sendTx () {
     //     sequence: data.value.sequence
     // }
 
+    // var txInfo = {
+    //     type: "bacchain/MsgEdata",
+    //     account:from_address,
+    //     utype: 1,
+    //     data: "12",
+    //     feeDenom: "nbac",
+    //     fee: 100000000,
+    //     gas: 100000000,
+    //     memo: "",
+    //     account_number: data.value.account_number,
+    //     sequence: data.value.sequence
+    // }
+
+    // var txInfo = {
+    //     type: "bacchain/MsgIssueToken",
+    //     owner_address:from_address,
+    //     outer_name: 'lhy',
+    //     supply_num: "10",
+    //     margin_amount:"1000000000",
+    //     margin_denom:"ubcv", //only ubcv
+    //     precision:6,
+    //     website:"https://www.bitcv.com",
+    //     description:"https://www.bitcv.com",
+    //     feeDenom: "nbac",
+    //     fee: 100000000,
+    //     gas: 100000000,
+    //     memo: "",
+    //     account_number: data.value.account_number,
+    //     sequence: data.value.sequence
+    // }
+
+
+    // var txInfo = {
+    //     type: "bacchain/MsgRedeem",
+    //     account:from_address,
+    //     redeem_amount: '9999999',
+    //     redeem_inner_name: "lhy-725",
+    //     feeDenom: "nbac",
+    //     fee: 100000000,
+    //     gas: 100000000,
+    //     memo: "",
+    //     account_number: data.value.account_number,
+    //     sequence: data.value.sequence
+    // }
+
     var txInfo = {
-        type: "bacchain/MsgEdata",
+        type: "bacchain/MsgAddMargin",
         account:from_address,
-        utype: 1,
-        data: "12",
+        inner_name: "lhy-725",
+        margin_amount: "10",
+        margin_denom:"ubcv", //only ubcv
         feeDenom: "nbac",
         fee: 100000000,
         gas: 100000000,
@@ -243,6 +289,8 @@ async function sendTx () {
         account_number: data.value.account_number,
         sequence: data.value.sequence
     }
+
+
 
     console.log(txInfo)
 
