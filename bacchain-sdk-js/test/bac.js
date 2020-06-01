@@ -260,14 +260,14 @@ async function sendTx () {
     //     memo: "",
     //     account_number: data.value.account_number,
     //     sequence: data.value.sequence
-    // }
+    //  }
 
 
     // var txInfo = {
     //     type: "bacchain/MsgRedeem",
     //     account:from_address,
-    //     redeem_amount: '9999999',
-    //     redeem_inner_name: "lhy-725",
+    //     redeem_amount: '10',
+    //     redeem_inner_name: "lhy-475",
     //     feeDenom: "nbac",
     //     fee: 100000000,
     //     gas: 100000000,
@@ -276,19 +276,19 @@ async function sendTx () {
     //     sequence: data.value.sequence
     // }
 
-    // var txInfo = {
-    //     type: "bacchain/MsgAddMargin",
-    //     account:from_address,
-    //     inner_name: "lhy-725",
-    //     margin_amount: "10",
-    //     margin_denom:"ubcv", //only ubcv
-    //     feeDenom: "nbac",
-    //     fee: 100000000,
-    //     gas: 100000000,
-    //     memo: "",
-    //     account_number: data.value.account_number,
-    //     sequence: data.value.sequence
-    // }
+    var txInfo = {
+        type: "bacchain/MsgAddMargin",
+        account:from_address,
+        inner_name: "lhy-725",
+        margin_amount: "10",
+        margin_denom:"ubcv", //only ubcv
+        feeDenom: "nbac",
+        fee: 100000000,
+        gas: 100000000,
+        memo: "",
+        account_number: data.value.account_number,
+        sequence: data.value.sequence
+    }
 
 
 

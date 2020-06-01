@@ -366,6 +366,7 @@ bacchainSdk.prototype.NewStdMsg = function(input) {
                     }
                 ]
             }
+            break;
         case "bacchain/MsgRedeem":
             stdSignMsg.json = {
                 msgs: [
@@ -381,6 +382,7 @@ bacchainSdk.prototype.NewStdMsg = function(input) {
                     }
                 ]
             }
+            break;
         case "bacchain/MsgAddMargin":
             stdSignMsg.json = {
                 msgs: [
