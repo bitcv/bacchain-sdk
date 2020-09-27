@@ -11,9 +11,36 @@ bacchainSdk.setBech32MainPrefix("bac")
 //获取私钥
 const accAddr = bacchainSdk.getAddress(mnemonic);
 const ecpairPriv = bacchainSdk.getECPairPriv(mnemonic);
-
-console.log(accAddr)
 console.log(ecpairPriv.toString('hex'))
+
+console.log(bacchainSdk.getPriKeyByMnemonic(mnemonic))
+
+var prikeyHex = ecpairPriv.toString('hex')
+
+
+
+
+
+//根据助记词获取公钥
+console.log(bacchainSdk.getPubKeyByMnemonic(mnemonic))
+
+//根据助记词获取私钥
+console.log(bacchainSdk.getPriKeyByMnemonic(mnemonic))
+
+//根据私钥匙获取公钥
+console.log(bacchainSdk.getPubKeyByPriKey(prikeyHex))
+
+
+//根据私钥获取地址
+console.log(bacchainSdk.getAddrByPriKey(prikeyHex))
+
+
+//使用16进制私钥生成私钥buffer
+var ecpairPrivNew = Buffer.from(prikeyHex,'hex')
+
+//
+// console.log(accAddr)
+// console.log(ecpairPriv.toString('hex'))
 
 
 
@@ -80,19 +107,22 @@ sendTx();
 async function sendTx () {
     var data = await  bacchainSdk.getAccounts(accAddr)
 
-    // var txInfo = {
-    //     type: "bacchain/MsgSend",
-    //     from_address :from_address,
-    //     to_address :"bac19qp38ktnphpy0v8883ht8yw56y70v788vgde9n",
-    //     amountDenom: "nbac",
-    //     amount: 1,
-    //     feeDenom: "nbac",
-    //     fee: 2000000,
-    //     gas: 2000000,
-    //     memo: "hello,bac",
-    //     account_number: data.value.account_number,
-    //     sequence: data.value.sequence
-    // }
+
+    var txInfo = {
+        type: "bacchain/MsgSend",
+        from_address :from_address,
+        to_address :"bac19qp38ktnphpy0v8883ht8yw56y70v788vgde9n",
+        amountDenom: "nbac",
+        amount: 1,
+        feeDenom: "nbac",
+        fee: 2000000,
+        gas: 2000000,
+        memo: "hello,bac",
+        account_number: data.value.account_number,
+        sequence: data.value.sequence
+    }
+
+
 
     //发交易
     // var txInfo = {
@@ -276,33 +306,34 @@ async function sendTx () {
     //     sequence: data.value.sequence
     // }
 
-    var txInfo = {
-        type: "bacchain/MsgAddMargin",
-        account:from_address,
-        inner_name: "lhy-725",
-        margin_amount: "10",
-        margin_denom:"ubcv", //only ubcv
-        feeDenom: "nbac",
-        fee: 100000000,
-        gas: 100000000,
-        memo: "",
-        account_number: data.value.account_number,
-        sequence: data.value.sequence
-    }
+    // var txInfo = {
+    //     type: "bacchain/MsgAddMargin",
+    //     account:from_address,
+    //     inner_name: "lhy-725",
+    //     margin_amount: "10",
+    //     margin_denom:"ubcv", //only ubcv
+    //     feeDenom: "nbac",
+    //     fee: 100000000,
+    //     gas: 100000000,
+    //     memo: "",
+    //     account_number: data.value.account_number,
+    //     sequence: data.value.sequence
+    // }
 
 
 
-    console.log(txInfo)
-
+    //标准交易
     var  stdSignMsg = bacchainSdk.NewStdMsg(txInfo);
-    var signedTx = bacchainSdk.sign(stdSignMsg, ecpairPriv);
 
+    //签名交易
+    var  signedTx = bacchainSdk.sign(stdSignMsg,ecpairPrivNew,'sync');
     console.log('%j',signedTx)
 
 
+
     //发送交易
-    var data = await bacchainSdk.broadcast(signedTx)
-    console.log('%j',data)
+     var data = await bacchainSdk.broadcast(signedTx)
+    console.log(data)
 }
 
 

@@ -449,6 +449,7 @@ bacchainSdk.prototype.sign = function(stdSignMsg, ecpairPriv, modeType = "sync")
     return signedTx;
 }
 
+
 bacchainSdk.prototype.broadcast = function(signedTx) {
     return fetch(this.url + "/txs", {
         method: 'POST',
@@ -514,6 +515,32 @@ bacchainSdk.prototype.getLatestBlock = function() {
 bacchainSdk.prototype.generateRandomMnemonic = function() {
     return bip39.generateMnemonic(256);
 }
+
+//根据注记词获取私钥
+bacchainSdk.prototype.getPriKeyByMnemonic = function(mnemonic) {
+    return this.getECPairPriv(mnemonic).toString('hex');
+}
+
+//根据注记词获取公钥
+bacchainSdk.prototype.getPubKeyByMnemonic = function(mnemonic) {
+    return getPubKeyBase64(this.getECPairPriv(mnemonic));
+}
+
+//根据私钥获取公钥
+bacchainSdk.prototype.getPubKeyByPriKey = function(priKey) {
+    var buffer = Buffer.from(priKey,'hex')
+    var pubKeyByte = secp256k1.publicKeyCreate(buffer);
+    return Buffer.from(pubKeyByte, 'binary').toString('base64');
+}
+
+//根据私钥获取地址
+bacchainSdk.prototype.getAddrByPriKey = function(priKey) {
+    var buffer = Buffer.from(priKey,'hex')
+    var pubKeyByte = secp256k1.publicKeyCreate(buffer);
+    const words = bech32.toWords(bitcoinjs.crypto.hash160(pubKeyByte));
+    return bech32.encode(this.bech32MainPrefix, words);
+}
+
 
 module.exports = {
 	newBacchainSdk: newBacchainSdk
