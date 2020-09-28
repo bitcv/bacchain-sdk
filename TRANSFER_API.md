@@ -249,7 +249,16 @@ curl -H "Content-Type: application/json" -X POST  --data '{"tx":{"msg":[{"type":
 
 * `txhash` 交易哈希
 
+正确示例
+正确示例:{"height":"0","txhash":"504ECA11225E34618CDFF946EB88B430FBA16F7E76D39A90D05B1187CFE914CB"}
 
+错误示例:交易已经存在
+{"error":"broadcast_tx_sync: Response error: RPC error -32603 - Internal error: Tx already exists in cache"}
+
+错误示例:签名错误
+{"height":"0","txhash":"7711FA97DDBD916E233093D0A2D261FDBA3886EA6B508A82D92B8704847264C8","code":4,"raw_log":"{\"codespace\":\"sdk\",\"code\":4,\"message\":\"signature verification failed; verify correct account sequence and chain-id\"}"}
+
+判断标准存在hash且不存在code;如果存在code,后边的是错误日志；原则上是否发送成功,依照是否可以在链上查询。
 
 
 
