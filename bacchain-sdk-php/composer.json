@@ -1,0 +1,16 @@
+{
+    "name": "andrewwu/bacchain-phpsdk",
+    "description": "Bit Asset Chain PHP SDK",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Walter",
+            "email": "support@mail.rrex.com"
+        }
+    ],
+    "require": { 
+	"bitwasp/bitcoin": "*",
+	"bitwasp/secp256k1-php" : "*"
+    }
+}
