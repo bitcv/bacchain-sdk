@@ -514,7 +514,7 @@ class BACChainSDK
         BACChainSDK::sortObject($msg);
         $ret = array(
             "json" => $msg,
-            "bytes" => $this->convertStringToBytes(json_encode($msg))
+            "bytes" => $this->convertStringToBytes(json_encode($msg, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE))
         );
         return $ret;
     }
@@ -555,11 +555,11 @@ class BACChainSDK
    
         $signature =  $privateKey->sign(Buffer::hex($hash));
         $r = gmp_strval($signature->getR(), 16);
- 
+        $r = str_pad($r, 64, '0', STR_PAD_LEFT);
         $s = gmp_strval($signature->getS(), 16);
- 
+        $s = str_pad($s, 64, '0', STR_PAD_LEFT);
         $signatureBase64 = base64_encode(hex2bin($r . $s));
-      
+        
         echo $signatureBase64 . "\n";
         $signedTx = array(
             "tx" => array(
