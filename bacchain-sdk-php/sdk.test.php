@@ -21,7 +21,18 @@ $sdk = new BACChainSDK($lcdUrl, $chainId);
 $worldlist = new BACWordList();
 //echo "\n";
 
+echo "获得所有销毁地址\n";
+//BCV 销毁地址
+$addKey = "burnaddr";
+echo $sdk->getAddrForBurn($addKey);
+$minerKey = "bcvburnfrombuybcvstakeaddr";
+echo $sdk->getAddrForBurn($minerKey);
+$energyKey = "energyburnaddr";
+echo $sdk->getAddrForBurn($energyKey);
+$edataKey = "burnaddrfromedatasave";
+echo $sdk->getAddrForBurn($edataKey);
 
+exit;
 
 $base64 = $sdk->getPubKeyByMnemonic($mnemonic);
 print_r($base64);

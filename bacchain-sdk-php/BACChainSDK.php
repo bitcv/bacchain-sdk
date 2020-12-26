@@ -202,6 +202,20 @@ class BACChainSDK
         return encode($this->bech32MainPrefix, $data);
     }
 
+    public function getAddrForBurn($burnKey)
+    {
+        $hex = new Buffer($burnKey);
+        $hash160 = Hash::sha256($hex)->getHex();
+        $hash40 = strtoUpper(substr($hash160, 0, 40));
+        $hash40_buffer = Buffer::hex($hash40);
+ 
+        $encodeData = array_values(unpack('C*', $hash40_buffer->getBinary())); //$priKey->getBuffer()->getBinary()));
+
+       $data = convertBits($encodeData, count($encodeData), 8, 5, true);
+
+        return encode($this->bech32MainPrefix, $data);
+    }
+
     public function getAddrByPubKey($pubKey)
     {
         $buffer =  base64_decode($pubKey);
