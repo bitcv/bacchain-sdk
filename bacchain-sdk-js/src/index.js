@@ -541,6 +541,17 @@ bacchainSdk.prototype.getAddrByPriKey = function(priKey) {
     return bech32.encode(this.bech32MainPrefix, words);
 }
 
+//根据销毁地址关键字获取地址
+bacchainSdk.prototype.getAddrForBurn = function(addrKey) {
+    var buffer = Buffer.from(addrKey)
+    var hash = bitcoinjs.crypto.sha256(buffer)
+    var hash40 = hash.toString("hex").substring(0, 40);
+    var hash40_buffer = Buffer.from(hash40, 'hex');
+
+    const words = bech32.toWords(hash40_buffer);
+    return bech32.encode(this.bech32MainPrefix, words);
+}
+
 
 module.exports = {
 	newBacchainSdk: newBacchainSdk
